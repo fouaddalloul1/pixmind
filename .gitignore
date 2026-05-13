@@ -1,0 +1,48 @@
+# Flutter/Dart
+**/build/
+**/.dart_tool/
+**/.pub/
+**/.pub-cache/
+**/*.lock
+pixmind_app/build/
+
+# Large files
+*.apk
+*.aab
+*.ipa
+*.dSYM/
+*.so
+*.dll
+*.exe
+
+# Temporary
+**/*.log
+**/*.tmp
+**/*.swp
+**/*.bak
+
+# IDE
+.idea/
+.vscode/
+**/*.iml
+**/.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python (للـ pixmind_lab)
+**/__pycache__/
+**/*.pyc
+**/.ipynb_checkpoints/
+
+# Secrets
+.env
+**.key
+**.pem
+secrets/
+
+# Local config
+local.properties
+*.user
