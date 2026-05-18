@@ -104,7 +104,7 @@ class HomeController extends StateNotifier<HomeState> {
     if (!state.hasPermission) {
       state = state.copyWith(
         loading: false,
-        error: 'لم يتم منح صلاحية الوصول للصور',
+        error: AppStrings.errorPermission,
       );
       return;
     }
@@ -139,7 +139,7 @@ class HomeController extends StateNotifier<HomeState> {
         permission != PermissionState.limited) {
       state = state.copyWith(
         permissionStatus: permission,
-        error: 'انتهت صلاحية الوصول للصور',
+        error: AppStrings.errorPermission,
       );
       return;
     }
@@ -180,7 +180,6 @@ class HomeController extends StateNotifier<HomeState> {
 
   Future<void> onAppResumed() async {
     final permission = await _repo.checkPermission();
-    // إذا تغيّرت الصلاحية (سواء أُعطيت أو سُحبت)
     if (permission != state.permissionStatus) {
       state = state.copyWith(permissionStatus: permission);
       if (state.hasPermission) {
@@ -188,7 +187,7 @@ class HomeController extends StateNotifier<HomeState> {
       } else {
         state = state.copyWith(
           items: [],
-          error: 'تم سحب صلاحية الوصول للصور',
+          error: AppStrings.errorPermission,
         );
       }
     }
@@ -286,12 +285,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   }
 
   Widget _buildBody(BuildContext context, HomeState state, HomeController ctrl) {
-    // ── تاب الألبومات المجلدية ──
     if (state.filter == MediaFilter.folders) {
       return const FolderAlbumsTab();
     }
 
-    // ── لا صلاحية ──
     if (!state.hasPermission && state.permissionStatus != null) {
       return _PermissionDeniedView(onRetry: ctrl.loadFirstPage);
     }
@@ -303,7 +300,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
           children: [
             CircularProgressIndicator(color: AppColors.navyDeep),
             SizedBox(height: 16),
-            Text('جاري تحميل صورك...',
+            Text(AppStrings.loadingPhotos,
                 style: TextStyle(color: AppColors.textSecondary)),
           ],
         ),
@@ -326,7 +323,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               const SizedBox(height: 16),
               ElevatedButton(
                   onPressed: ctrl.loadFirstPage,
-                  child: const Text('إعادة المحاولة')),
+                  child: const Text(AppStrings.errorGeneric)),
             ],
           ),
         ),
@@ -335,7 +332,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
     if (state.items.isEmpty) {
       return const Center(
-        child: Text('لا توجد صور',
+        child: Text(AppStrings.noPhotos,
             style: TextStyle(color: AppColors.textSecondary)),
       );
     }
@@ -379,7 +376,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 padding: const EdgeInsets.all(16),
                 child: Center(
                   child: Text(
-                    'تم عرض كل الصور (${state.totalCount})',
+                    '$AppStrings.loadAllPhotos (${state.totalCount})',
                     style: const TextStyle(
                         color: AppColors.textHint, fontSize: 12),
                   ),
@@ -415,14 +412,14 @@ class _PermissionDeniedView extends StatelessWidget {
                   color: AppColors.errorRed, size: 40),
             ),
             const SizedBox(height: 24),
-            const Text('لا يمكن الوصول للصور',
+            const Text(AppStrings.errorPermission,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: AppColors.textPrimary)),
             const SizedBox(height: 12),
             const Text(
-              'يبدو أنك سحبت صلاحية الوصول للصور.\nيرجى تفعيلها من إعدادات التطبيق.',
+            AppStrings.permDeniedBody,
               textAlign: TextAlign.center,
               style:
               TextStyle(color: AppColors.textSecondary, fontSize: 14, height: 1.6),
@@ -432,11 +429,10 @@ class _PermissionDeniedView extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () async {
-                  // يفتح إعدادات التطبيق مباشرة
                   await PhotoManager.openSetting();
                 },
                 icon: const Icon(Icons.settings_outlined, color: Colors.white),
-                label: const Text('فتح الإعدادات',
+                label: const Text(AppStrings.openSettings,
                     style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.navyDeep),
@@ -445,7 +441,7 @@ class _PermissionDeniedView extends StatelessWidget {
             const SizedBox(height: 12),
             TextButton(
               onPressed: onRetry,
-              child: const Text('تحقق مرة أخرى',
+              child: const Text(AppStrings.checkAgain,
                   style: TextStyle(color: AppColors.skyBlue)),
             ),
           ],
@@ -454,10 +450,6 @@ class _PermissionDeniedView extends StatelessWidget {
     );
   }
 }
-
-// ─────────────────────────────────────────
-// Filter Tabs — أربعة تابات
-// ─────────────────────────────────────────
 class _FilterTabs extends StatelessWidget {
   final MediaFilter current;
   final ValueChanged<MediaFilter> onChanged;

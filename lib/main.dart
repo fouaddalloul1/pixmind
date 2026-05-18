@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
+import 'data/database/objectbox/objectbox_store.dart';
+
+
+final objectBoxProvider = Provider<ObjectBoxStore>((ref) {
+  throw UnimplementedError('Override in main()');
+});
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +23,12 @@ void main() async {
       statusBarIconBrightness: Brightness.light,
     ),
   );
+  final obStore = await ObjectBoxStore.create();
 
-  runApp(const ProviderScope(child: PixMindApp()));
+  runApp(
+      ProviderScope(
+          overrides: [
+            objectBoxProvider.overrideWithValue(obStore),
+          ],
+      child: PixMindApp()));
 }

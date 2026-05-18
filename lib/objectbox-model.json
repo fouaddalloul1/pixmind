@@ -1,0 +1,229 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:466381110667171496",
+      "lastPropertyId": "3:8715003966604002938",
+      "name": "DuplicateGroup",
+      "properties": [
+        {
+          "id": "1:7213673854422414146",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2777658974738769110",
+          "name": "groupHash",
+          "type": 9
+        },
+        {
+          "id": "3:8715003966604002938",
+          "name": "foundAt",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:1673547060900335371",
+      "lastPropertyId": "5:7110732834139189988",
+      "name": "DuplicateMember",
+      "properties": [
+        {
+          "id": "1:2583873460436993160",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6455725102917339941",
+          "name": "assetId",
+          "type": 9
+        },
+        {
+          "id": "3:2026590420928672865",
+          "name": "phash",
+          "type": 9
+        },
+        {
+          "id": "4:5810386753480990983",
+          "name": "hammingDistance",
+          "type": 6
+        },
+        {
+          "id": "5:7110732834139189988",
+          "name": "groupId",
+          "indexId": "1:5935365044012149312",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "DuplicateGroup"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6843951167299019905",
+      "lastPropertyId": "10:8851362538303239846",
+      "name": "MediaAnalysis",
+      "properties": [
+        {
+          "id": "1:9205971078144043680",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1179442140568667096",
+          "name": "assetId",
+          "indexId": "2:409617396114259788",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:5064314375744927513",
+          "name": "aiCaption",
+          "type": 9
+        },
+        {
+          "id": "4:3175241220694051035",
+          "name": "extractedText",
+          "type": 9
+        },
+        {
+          "id": "5:3605837666318613069",
+          "name": "sentiment",
+          "type": 9
+        },
+        {
+          "id": "6:6663633047255907547",
+          "name": "credibilityScore",
+          "type": 8
+        },
+        {
+          "id": "7:2463094390669097936",
+          "name": "labelsJson",
+          "type": 9
+        },
+        {
+          "id": "8:7442208732386933648",
+          "name": "embedding",
+          "indexId": "3:3289520274905075004",
+          "type": 28,
+          "flags": 8
+        },
+        {
+          "id": "9:3457847204058994215",
+          "name": "analyzedAt",
+          "type": 10
+        },
+        {
+          "id": "10:8851362538303239846",
+          "name": "isAnalyzed",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:2942759972950401537",
+      "lastPropertyId": "3:6935739115043102364",
+      "name": "PersonAsset",
+      "properties": [
+        {
+          "id": "1:1580489261297542554",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6866483896111059400",
+          "name": "assetId",
+          "type": 9
+        },
+        {
+          "id": "3:6935739115043102364",
+          "name": "personId",
+          "indexId": "4:8588067920604260836",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "PersonGroup"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:7973799645742335597",
+      "lastPropertyId": "5:1167887161658848471",
+      "name": "PersonGroup",
+      "properties": [
+        {
+          "id": "1:7495853925516010184",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2789099773216262713",
+          "name": "groupId",
+          "type": 9
+        },
+        {
+          "id": "3:2102451205337737707",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:3022320504656237334",
+          "name": "coverAssetId",
+          "type": 9
+        },
+        {
+          "id": "5:1167887161658848471",
+          "name": "createdAt",
+          "type": 10
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:9000331004368135959",
+      "lastPropertyId": "3:5328509157888539740",
+      "name": "SecureFile",
+      "properties": [
+        {
+          "id": "1:8963472375488746625",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:510070222925384622",
+          "name": "assetId",
+          "indexId": "5:6611171340407742716",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:5328509157888539740",
+          "name": "addedAt",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "6:9000331004368135959",
+  "lastIndexId": "5:6611171340407742716",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

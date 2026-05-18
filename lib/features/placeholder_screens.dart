@@ -30,9 +30,6 @@ class AlbumsScreen extends StatelessWidget {
           style: TextStyle(color: AppColors.textSecondary))));
 }
 
-// ═══════════════════════════════════════════════════════════════
-// AlbumDetailScreen — يعرض صور ألبوم معين مع pagination وسوايب
-// ═══════════════════════════════════════════════════════════════
 class AlbumDetailScreen extends ConsumerStatefulWidget {
   final AlbumInfo album;
   const AlbumDetailScreen({super.key, required this.album});
